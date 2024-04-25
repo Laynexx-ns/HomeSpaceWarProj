@@ -73,7 +73,7 @@ namespace HomeSpaceWarProj.Classes
         }
         public void Draw(SpriteBatch spritebatch)
         {
-            spritebatch.Draw(texture, position, color: Microsoft.Xna.Framework.Color.White);
+            spritebatch.Draw(texture, position, color: Microsoft.Xna.Framework.Color.IndianRed);
         }
 
     }
