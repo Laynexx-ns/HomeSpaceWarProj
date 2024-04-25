@@ -39,13 +39,13 @@ namespace HomeSpaceWarProj.Classes
         }
         public int TextureWidth
         {
-            get {return framewidth;}
+            get { return framewidth; }
         }
         public int PositionX
         {
             get { return (int)position.X; }
             set { position.X = value; }
-            
+
         }
         public int PositionY
         {
@@ -64,7 +64,7 @@ namespace HomeSpaceWarProj.Classes
 
 
 
-        
+
         public Mine(float Xspeed, float Yspeed)
         {
             texture = null;
@@ -90,23 +90,15 @@ namespace HomeSpaceWarProj.Classes
             desrect.X = (int)position.X;
             desrect.Y = (int)position.Y;
 
-            anitime += gameTime.TotalGameTime.TotalSeconds;
-            if (anitime > duration)
-            {
-                framenumber++;
-                anitime = 0;
-            }
-            if (framenumber > 7)
-            {
-                framenumber = 0;
-            }
+            Animation(gameTime);
+            
 
             sourcerect = new Rectangle(framenumber * framewidth, 0, framewidth, texture.Height);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position,sourcerect,  Color.White);
+            spriteBatch.Draw(texture, position, sourcerect, Color.White);
         }
 
         public void Reset(float Xspeed, float Yspeed)
@@ -120,5 +112,19 @@ namespace HomeSpaceWarProj.Classes
             frameheight = 61;
 
         }
-}
+        public void Animation(GameTime gameTime)
+        {
+            anitime += gameTime.TotalGameTime.TotalSeconds;
+            if (anitime > duration)
+            {
+                framenumber++;
+                anitime = 0;
+            }
+            if (framenumber > 7)
+            {
+                framenumber = 0;
+            }
+        }
+
+    }
 }
