@@ -9,7 +9,7 @@ namespace SpaceWar.Classes
 
     public enum GameMode
     {
-        Menu, Reset, Playing, GameOver, Exit
+        Menu, Reset, Playing, GameOver, Exit, Info
     }
 
 }

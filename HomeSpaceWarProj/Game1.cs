@@ -34,7 +34,7 @@ namespace HomeSpaceWarProj
         private List<Explosion> explosions;
         HUD hud;
         GameOver gameOver;
-
+        InfoMenu infoMenu;
         Label labelscore;
         int count = 0;
 
@@ -68,8 +68,11 @@ namespace HomeSpaceWarProj
             labelscore = new Label($"Score: {count}", new Vector2(650,  10), Color.White);    
             hud = new HUD();
             gameOver = new GameOver();
+            infoMenu = new InfoMenu();
 
             player.TakeDamage += hud.ReactionOnPlayerTakeDamage;
+            player.UseAttackSpeed += hud.ReactionOnPlayerRage;
+            player.UseShotGun += hud.ReactionOnPlayerShotGun;
             base.Initialize();
         }
 
@@ -95,7 +98,8 @@ namespace HomeSpaceWarProj
             mainMenu.LoadContent(Content);
             hud.LoadContent(Content);
             gameOver.LoadContent(Content);
-            
+            infoMenu.LoadContent(Content);
+
             for (int i = 0; i< mineAmount; i++)
             {
                 GenerateMine();
@@ -105,8 +109,7 @@ namespace HomeSpaceWarProj
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
+            
 
             switch (gameMode)
             {
@@ -120,7 +123,7 @@ namespace HomeSpaceWarProj
                     UpdateExplosions(gameTime);
                     CheckCollision();
                     labelscore.Update($"Score: {count}");
-                    
+                    hud.Update(gameTime);
                     break;
                 case GameMode.Exit:
                     Exit();
@@ -131,6 +134,9 @@ namespace HomeSpaceWarProj
                 case GameMode.Reset:
                     Reset(Content);
                     gameMode = GameMode.Playing;
+                    break;
+                case GameMode.Info:
+                    infoMenu.Update(Content, gameTime);
                     break;
             }
             
@@ -174,6 +180,9 @@ namespace HomeSpaceWarProj
                     gameOver.Draw(_spriteBatch);
                     
                   
+                    break;
+                case GameMode.Info:
+                    infoMenu.Draw(_spriteBatch);
                     break;
             }
             
@@ -230,7 +239,7 @@ namespace HomeSpaceWarProj
             
         }
        
-
+        
 
         public void CheckCollision()
         {

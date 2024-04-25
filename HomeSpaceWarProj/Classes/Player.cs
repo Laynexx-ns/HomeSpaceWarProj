@@ -24,13 +24,13 @@ namespace HomeSpaceWarProj.Classes
         private int speed;
         private Rectangle desrect;
 
-        public List<Laser> laserlist;
-
-        Label labelattackspeed;
-        Label labelshotgun;
-
         Color green = Color.GreenYellow;
         Color red = Color.Red;
+        public List<Laser> laserlist;
+
+        
+
+        
 
         private int time;
         private double anitime = 0;
@@ -48,9 +48,13 @@ namespace HomeSpaceWarProj.Classes
         private const int framewidth = 115;
         private const int frameheigth = 69;
 
+        //events
         public event Action TakeDamage;
-
+        public event Action UseShotGun;
+        public event Action UseAttackSpeed;
+        //collision
         private Rectangle sourserect;
+
 
 
         //размеры окна
@@ -80,15 +84,20 @@ namespace HomeSpaceWarProj.Classes
             skill_attackspeedCanBeUsed = true;
             attackspeed = 25;
 
-            labelattackspeed = new Label("FocusFire: 0", new Vector2(10, 400), Color.GreenYellow);
-            labelshotgun = new Label("Shotgun: 0", new Vector2(200, 400), Color.GreenYellow);
+            
 
         }
 
+        public Player(Vector2 position)  : this(800, 450)
+        {
+            this.position = position;
+            
+        }
+
+
         public void LoadContent(ContentManager manager)
         {
-            labelattackspeed.LoadContent(manager);
-            labelshotgun.LoadContent(manager);
+            
             texture = manager.Load<Texture2D>("shipAnimation");
             desrect = new Rectangle((int)position.X, (int)position.Y, framewidth, texture.Height);
         }
@@ -97,14 +106,7 @@ namespace HomeSpaceWarProj.Classes
             //
             
             
-            if (!skill_attackspeedCanBeUsed)
-            {
-                labelattackspeed.Update($"FocusFire: {((int)(10 - skill_attackspeedtime)).ToString()}");
-            }
-            if (!skill_shotgunCanBeUsed)
-            {
-                labelshotgun.Update($"Shotgun: {((int)(5 - skill_shotguntime)).ToString()}");
-            }
+            
             //
 
             desrect.X = (int)position.X;
@@ -201,23 +203,7 @@ namespace HomeSpaceWarProj.Classes
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, position ,sourserect, Color.White);
-            if (skill_attackspeedCanBeUsed)
-            {
-                labelattackspeed.Draw(spriteBatch, green);
-            }
-            else
-            {
-                labelattackspeed.Draw(spriteBatch, red);
-            }
-
-            if (skill_shotgunCanBeUsed)
-            {
-                labelshotgun.Draw(spriteBatch, green);
-            }
-            else
-            {
-                labelshotgun.Draw(spriteBatch, red);
-            }
+            
 
             
             
@@ -253,8 +239,7 @@ namespace HomeSpaceWarProj.Classes
             skill_attackspeedCanBeUsed = true;
             attackspeed = 25;
 
-            labelattackspeed = new Label("FocusFire: 0", new Vector2(10, 400), Color.GreenYellow);
-            labelshotgun = new Label("Shotgun: 0", new Vector2(200, 400), Color.GreenYellow);
+            
         }
 
         public void ShotGun_Blast(ContentManager manager)
@@ -268,13 +253,20 @@ namespace HomeSpaceWarProj.Classes
                 laserlist.Add(l);
                 distanceY += 25;
             }
+            if (UseShotGun != null)
+            {
+                UseShotGun();
+            }
 
 
         }
         public void Skill_AttackSpeedBooster()
         {
             attackspeed = 5;
-            
+            if (UseAttackSpeed != null)
+            {
+                UseAttackSpeed();
+            }
         }
 
         public void Animation(GameTime gameTime)

@@ -104,6 +104,18 @@
 /processorParam:TextureFormat=Color
 /build:heart4x.png
 
+#begin InfoMenu.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:InfoMenu.png
+
 #begin laser.png
 /importer:TextureImporter
 /processor:TextureProcessor

@@ -19,6 +19,7 @@ namespace HomeSpaceWarProj.Classes
     {
         private Label labelplay;
         private Label labelexit;
+        private Label labelinfo;
         private List<Label> buttons;
         
 
@@ -31,9 +32,13 @@ namespace HomeSpaceWarProj.Classes
         public MainMenu()
         {
             buttons = new List<Label>();
-            labelplay = new Label("P L A Y", new Vector2(370, 220), Color.White);
+            labelplay = new Label("P L A Y", new Vector2(370, 200), Color.White);
             buttons.Add(labelplay);
-            labelexit = new Label("E X I T", new Vector2(370, 260), Color.White);
+
+            labelinfo = new Label("I N F O", new Vector2(370, 240), Color.White);
+            buttons.Add(labelinfo);
+
+            labelexit = new Label("E X I T", new Vector2(370, 280), Color.White);
             buttons.Add(labelexit);
             selected = 0;
             
@@ -73,6 +78,10 @@ namespace HomeSpaceWarProj.Classes
 
                 }
                 else if (selected == 1)
+                {
+                    Game1.gameMode = GameMode.Info;
+                }
+                else if (selected == 2)
                 {
                     Game1.gameMode = GameMode.Exit;
                 }

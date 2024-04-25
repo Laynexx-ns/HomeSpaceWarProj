@@ -29,7 +29,7 @@ namespace HomeSpaceWarProj.Classes
         public void Update()
         {
             KeyboardState keystate = Keyboard.GetState();
-            if (keystate.IsKeyDown(Keys.Enter))
+            if (keystate.IsKeyDown(Keys.Space))
             {
                 Game1.gameMode = GameMode.Menu;
             }
