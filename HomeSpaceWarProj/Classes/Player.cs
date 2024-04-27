@@ -43,6 +43,7 @@ namespace HomeSpaceWarProj.Classes
 
         private int attackspeed = 25;
 
+        private int xborder;
 
         private int currentframe;
         private const int framewidth = 115;
@@ -70,6 +71,7 @@ namespace HomeSpaceWarProj.Classes
 
         public Player(int screenwidth, int screenheight)
         {
+            xborder = 0;
             texture = null;
             position = new Vector2(10, 0);
             speed = 12;
@@ -88,9 +90,10 @@ namespace HomeSpaceWarProj.Classes
 
         }
 
-        public Player(Vector2 position)  : this(800, 450)
+        public Player(Vector2 position, int xborder)  : this(800, 450)
         {
             this.position = position;
+            this.xborder = xborder;
             
         }
 
@@ -146,7 +149,7 @@ namespace HomeSpaceWarProj.Classes
                 position.X += speed;
 
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.A) && position.X > -10)
+            if (Keyboard.GetState().IsKeyDown(Keys.A) && position.X > -10 && position.X > xborder)
             {
                 position.X -= speed;
             }
@@ -262,7 +265,7 @@ namespace HomeSpaceWarProj.Classes
         }
         public void Skill_AttackSpeedBooster()
         {
-            attackspeed = 5;
+            attackspeed = 4;
             if (UseAttackSpeed != null)
             {
                 UseAttackSpeed();

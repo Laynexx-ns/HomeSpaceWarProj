@@ -57,7 +57,7 @@ namespace HomeSpaceWarProj
 
         protected override void Initialize()
         {
-            mineAmount = 18;
+            mineAmount = 14;
 
             gameMode = GameMode.Menu;
             mainMenu = new MainMenu();
@@ -129,7 +129,7 @@ namespace HomeSpaceWarProj
                     Exit();
                     break;
                 case GameMode.GameOver:
-                    gameOver.Update();
+                    gameOver.Update(count);
                      break;
                 case GameMode.Reset:
                     Reset(Content);

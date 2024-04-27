@@ -26,7 +26,7 @@ namespace HomeSpaceWarProj.Classes
 
         public InfoMenu()
         {
-            player = new Player(new Vector2(500, 200));
+            player = new Player(new Vector2(500, 200), 430);
         }
 
 
